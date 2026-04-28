@@ -1,7 +1,8 @@
-package com.stiw2124.service;
+package com.stiw2124.assignment1_group4.service;
 
 import com.stiw2124.assignment1_group4.model.Book;
 import com.stiw2124.assignment1_group4.repository.BookRepository;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,11 +36,17 @@ public class BookServiceImpl implements BookService {
         return bookRepository.save(book);
     }
 
-    @Override
+    /*@Override
     @Transactional
     public Book save(Book book) {
         bookRepository.deleteById(id);
+    }*/
+@Override
+    @Transactional
+    public void deleteById(Long id) {
+        bookRepository.deleteById(id);
     }
+
 
     @Override
     public Page<Book> searchBooks(String q, Pageable pageable) {
