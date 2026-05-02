@@ -41,7 +41,7 @@ public class BookServiceImpl implements BookService {
     public Book save(Book book) {
         bookRepository.deleteById(id);
     }*/
-@Override
+    @Override
     @Transactional
     public void deleteById(Long id) {
         bookRepository.deleteById(id);
@@ -58,6 +58,20 @@ public class BookServiceImpl implements BookService {
 
         // If the search is empty, just return all books
         return findAll(pageable);
+    }
+
+
+    // Update book
+    @Override
+    @Transactional
+    public Book update(Long id, Book bookDetails){
+        Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found."));
+        book.setTitle(bookDetails.getTitle());
+        book.setAuthor(bookDetails.getAuthor());
+        book.setCategory(bookDetails.getCategory());
+        book.setShortDesc(bookDetails.getShortDesc());
+
+        return bookRepository.save(book);
     }
 
 }
