@@ -17,4 +17,7 @@ public interface BookService {
 
     // Pagination & Search Logic
     Page<Book> searchBooks(String q, Pageable pageable);
+
+    // Update Book
+    Book update(Long id, Book bookdetails);
 }
