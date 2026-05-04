@@ -2,6 +2,8 @@ package com.stiw2124.assignment1_group4.service;
 
 import com.stiw2124.assignment1_group4.model.Book;
 import com.stiw2124.assignment1_group4.repository.BookRepository;
+// importing booknotfoundexception
+import com.stiw2124.assignment1_group4.exception.BookNotFoundException;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -65,7 +67,9 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public Book update(Long id, Book bookDetails){
-        Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found."));
+        // before booknotfoundexception
+        //  Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found."));
+        Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found."));
         book.setTitle(bookDetails.getTitle());
         book.setAuthor(bookDetails.getAuthor());
         book.setCategory(bookDetails.getCategory());
